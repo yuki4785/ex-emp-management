@@ -18,7 +18,7 @@ public class AdministratorService {
     @Autowired
     private AdministratorRepository administratorRepository;
     
-        /**
+    /**
      * 管理者情報を挿入
      * 
      * @param administrator 管理者情報
