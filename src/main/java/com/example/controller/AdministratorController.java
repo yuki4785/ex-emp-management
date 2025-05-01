@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.domain.Administrator;
 import com.example.form.InsertAdministratorForm;
 import com.example.service.AdministratorService;
 
@@ -39,4 +42,21 @@ public class AdministratorController {
         return "administrator/insert.html";
     }
 
+    /**
+     * 管理者情報を登録し、ログイン画面にリダイレクト
+     * 
+     * @param form 入力フォーム情報
+     * @return ログイン画面へのリダイレクト
+     */
+    @PostMapping("/insert")
+    public String insert(InsertAdministratorForm form) {
+        Administrator administrator = new Administrator();
+        administrator.setName(form.getName());
+        administrator.setMailAddress(form.getMailAddress());
+        administrator.setPassword(form.getPassword());
+
+        administratorService.insert(administrator);
+
+        return "redirect:/";
+    }  
 }
