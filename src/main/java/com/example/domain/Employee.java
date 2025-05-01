@@ -4,6 +4,8 @@ import java.util.Date;
 
 /**
  * 従業員情報を表すドメインクラス
+ * 
+ * @author yukisato
  */
 public class Employee {
 

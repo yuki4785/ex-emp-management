@@ -10,6 +10,8 @@ import com.example.service.AdministratorService;
 
 /**
  * 管理者関連機能の処理の制御を⾏うコントローラ
+ * 
+ * @author yukisato
  */
 @Controller
 @RequestMapping("/")
@@ -39,4 +41,5 @@ public class AdministratorController {
         return "administrator/insert.html";
     }
 
+    
 }

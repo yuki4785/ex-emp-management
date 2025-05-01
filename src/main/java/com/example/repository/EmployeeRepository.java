@@ -14,12 +14,19 @@ import com.example.domain.Employee;
 
 /**
  * employeesテーブルを操作するリポジトリクラス
+ * 
+ * @author yukisato
  */
 @Repository
 public class EmployeeRepository {
 
     /**
-     * SQL操作用テンプレート。
+     * テーブル名（定数化）
+     */
+    private static final String TABLE_NAME = "employees";
+
+    /**
+     * SQL操作用テンプレート
      */
     @Autowired
     private NamedParameterJdbcTemplate template;
@@ -44,7 +51,6 @@ public class EmployeeRepository {
         return employee;
     };
 
-
     /**
      * 従業員一覧情報を入社日順（降順）で取得する
      * 
@@ -53,7 +59,7 @@ public class EmployeeRepository {
     public List<Employee> findAll() {
         String sql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, "
                    + "address, telephone, salary, characteristics, dependents_count "
-                   + "FROM employees ORDER BY hire_date DESC";
+                   + "FROM " + TABLE_NAME + " ORDER BY hire_date DESC";
         return template.query(sql, EMPLOYEE_ROW_MAPPER);
     }
 
@@ -66,20 +72,18 @@ public class EmployeeRepository {
     public Employee load(Integer id) {
         String sql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, "
                    + "address, telephone, salary, characteristics, dependents_count "
-                   + "FROM employees WHERE id = :id";
+                   + "FROM " + TABLE_NAME + " WHERE id = :id";
         SqlParameterSource param = new MapSqlParameterSource("id", id);
-        Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
-
-        return employee;
+        return template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
     }
 
     /**
-     * 従業員情報を更新します（ID以外のすべてのカラムを更新）。
+     * 従業員情報を更新します（ID以外のすべてのカラムを更新）
      * 
      * @param employee 更新する従業員情報
      */
     public void update(Employee employee) {
-        String sql = "UPDATE employees SET "
+        String sql = "UPDATE " + TABLE_NAME + " SET "
                    + "name = :name, image = :image, gender = :gender, hire_date = :hireDate, "
                    + "mail_address = :mailAddress, zip_code = :zipCode, address = :address, "
                    + "telephone = :telephone, salary = :salary, characteristics = :characteristics, "

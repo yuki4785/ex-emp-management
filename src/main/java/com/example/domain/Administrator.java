@@ -2,6 +2,8 @@ package com.example.domain;
 
 /**
  * 管理者情報を表すドメインクラス
+ * 
+ * @author yukisato
  */
 public class Administrator {
 
