@@ -39,7 +39,7 @@ public class AdministratorController {
      */
     @GetMapping("/toInsert")
     public String toInsert(InsertAdministratorForm form) {
-        return "administrator/insert.html";
+        return "administrator/insert";
     }
 
     /**
