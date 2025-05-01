@@ -20,11 +20,6 @@ public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
 
-    /**
-     * フォームの初期化処理を行うメソッド
-     * 
-     * @return 初期化されたInsertAdministratorFormオブジェクト
-     */
     @ModelAttribute
     public InsertAdministratorForm setUpForm() {
         return new InsertAdministratorForm();
@@ -38,7 +33,7 @@ public class AdministratorController {
      */
     @GetMapping("/toInsert")
     public String toInsert(InsertAdministratorForm form) {
-        return "administrator/insert.html";
+        return "administrator/insert";
     }
 
     
