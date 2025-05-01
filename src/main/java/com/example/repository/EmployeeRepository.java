@@ -78,7 +78,7 @@ public class EmployeeRepository {
     }
 
     /**
-     * 従業員情報を更新します（ID以外のすべてのカラムを更新）
+     * 従業員情報を更新します
      * 
      * @param employee 更新する従業員情報
      */
