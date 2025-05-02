@@ -94,4 +94,15 @@ public class AdministratorController {
         session.setAttribute("administratorName", administrator.getName());
         return "redirect:/employee/showList";
     }
+
+    /**
+	 * ログアウト処理
+	 * 
+	 * @return ログイン画面
+	 */
+	@GetMapping(value = "/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
 }
