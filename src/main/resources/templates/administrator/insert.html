@@ -31,98 +31,67 @@
           />
         </div>
       </div>
-      <!-- login form -->
-      <div class="row">
-        <div
-          class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
-        >
-          <!-- 背景をグレーに、埋め込んだようなコンポーネント -->
-          <div class="well">
-            <!-- ここから上を編集する必要はありません -->
 
-            <form method="post" 
-              action="login.html"
-              th:action="@{/insert}"
-              th:object="${insertAdministratorForm}"
-            >
+      <!-- 管理者登録フォーム -->
+      <div class="row">
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
+          <div class="well">
+            <form method="post" th:action="@{/insert}" th:object="${insertAdministratorForm}">
               <fieldset>
                 <legend>
                   管理者登録<br />(システムにログインできる管理者を登録します)
                 </legend>
+
                 <!-- 氏名 -->
                 <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <label for="name"> 氏名: </label>
-                      <label class="error-messages">
-                        氏名を入力してください
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        class="form-control"
-                        placeholder="山田太郎"
-                        th:field="*{name}"
-                      />
-                    </div>
-                  </div>
+                  <label for="name">氏名:</label>
+                  <div th:if="${#fields.hasErrors('name')}" class="error-messages" th:errors="*{name}"></div>
+                  <input
+                    type="text"
+                    id="name"
+                    class="form-control"
+                    placeholder="山田太郎"
+                    th:field="*{name}"
+                  />
                 </div>
+
                 <!-- メールアドレス -->
                 <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <label for="mailAddress"> メールアドレス: </label>
-                      <label class="error-messages">
-                        メールアドレスを入力してください
-                      </label>
-                      <input
-                        type="text"
-                        name="mailAddress"
-                        id="mailAddress"
-                        class="form-control"
-                        placeholder="yamada@mail.com"
-                        th:field="*{mailAddress}"
-                      />
-                    </div>
-                  </div>
+                  <label for="mailAddress">メールアドレス:</label>
+                  <div th:if="${#fields.hasErrors('mailAddress')}" class="error-messages" th:errors="*{mailAddress}"></div>
+                  <input
+                    type="text"
+                    id="mailAddress"
+                    class="form-control"
+                    placeholder="yamada@mail.com"
+                    th:field="*{mailAddress}"
+                  />
                 </div>
+
                 <!-- パスワード -->
                 <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <label for="password"> パスワード: </label>
-                      <label class="error-messages">
-                        パスワードを入力してください
-                      </label>
-                      <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        class="form-control"
-                        placeholder="password"
-                        th:field="*{password}"
-                      />
-                    </div>
-                  </div>
+                  <label for="password">パスワード:</label>
+                  <div th:if="${#fields.hasErrors('password')}" class="error-messages" th:errors="*{password}"></div>
+                  <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    placeholder="password"
+                    th:field="*{password}"
+                  />
                 </div>
+
                 <!-- 登録ボタン -->
                 <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <button type="submit" class="btn btn-primary">
-                        登録
-                      </button>
-                    </div>
-                  </div>
+                  <button type="submit" class="btn btn-primary">登録</button>
                 </div>
               </fieldset>
             </form>
-            <!-- ここから下を編集する必要はありません -->
           </div>
         </div>
       </div>
     </div>
+
     <!-- end container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
