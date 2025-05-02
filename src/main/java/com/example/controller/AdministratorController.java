@@ -2,6 +2,7 @@ package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,8 @@ import com.example.domain.Administrator;
 import com.example.form.InsertAdministratorForm;
 import com.example.form.LoginForm;
 import com.example.service.AdministratorService;
+
+import jakarta.servlet.http.HttpSession;
 
 /**
  * 管理者関連機能の処理の制御を⾏うコントローラ
@@ -23,6 +26,9 @@ public class AdministratorController {
 
     @Autowired
     private AdministratorService administratorService;
+
+    @Autowired
+    private HttpSession session;
 
     @ModelAttribute
     public InsertAdministratorForm setUpForm() {
@@ -67,5 +73,25 @@ public class AdministratorController {
     @GetMapping("/")
     public String toLogin(LoginForm form) {
         return "administrator/login";
-    }  
+    }
+    
+    /**
+     * ログイン処理
+     * 
+     * @param form  ログイン時に使⽤するフォーム
+     * @param model 格納するためのオブジェクト
+     * @return ログイン画面へリダイレクト or 従業員⼀覧画面
+     */
+    @PostMapping("/login")
+    public String login(LoginForm form, Model model) {
+        Administrator administrator = new Administrator();
+        administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+
+        if (administrator == null) {
+            model.addAttribute("errorMessage", "メールアドレスまたはパスワードが間違っています");
+            return "administrator/login";
+        }
+        session.setAttribute("administratorName", administrator.getName());
+        return "redirect:/employee/showList";
+    }
 }
