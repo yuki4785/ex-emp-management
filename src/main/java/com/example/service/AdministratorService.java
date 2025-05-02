@@ -15,13 +15,8 @@ import com.example.repository.AdministratorRepository;
 @Transactional
 public class AdministratorService {
 
-	private final AdministratorRepository administratorRepository;
-
-	@Autowired
-	public AdministratorService(AdministratorRepository administratorRepository) {
-		this.administratorRepository = administratorRepository;
-	}
-
+    @Autowired
+	private AdministratorRepository administratorRepository;
     
     /**
      * 管理者情報を挿入
