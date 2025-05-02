@@ -15,8 +15,13 @@ import com.example.repository.AdministratorRepository;
 @Transactional
 public class AdministratorService {
 
-    @Autowired
-    private AdministratorRepository administratorRepository;
+	private final AdministratorRepository administratorRepository;
+
+	@Autowired
+	public AdministratorService(AdministratorRepository administratorRepository) {
+		this.administratorRepository = administratorRepository;
+	}
+
     
     /**
      * 管理者情報を挿入
@@ -25,5 +30,17 @@ public class AdministratorService {
      */
     public void insert(Administrator administrator) {
         administratorRepository.insert(administrator);
+    }
+
+    /**
+     * ログイン処理をする
+     * 
+     * @param mailAddress 管理者用のメールアドレス
+     * @param password    管理者用のパスワード
+     * 
+     * @return 検索した管理者情報
+     */
+    public Administrator login(String mailAddress, String password) {
+        return administratorRepository.findByMailAddressAndPassword(mailAddress, password);
     }
 }
